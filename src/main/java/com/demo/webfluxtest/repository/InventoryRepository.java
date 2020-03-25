@@ -10,10 +10,8 @@ import java.util.Map;
 
 @Repository
 public interface InventoryRepository extends ReactiveMongoRepository<Inventory, String> {
-    public Mono<Inventory> findByAlbum(String album);
-    public Mono<Inventory> findByArtist(String artist);
-    public Flux<Inventory> findAllByArtist(String artist);
-    public Mono<Inventory> findById(int id);
-    public Mono<Inventory> deleteById(int id);
-    public Mono<Inventory> readById(int id);
+    Mono<Inventory> findByAlbum(String album);
+    Flux<Inventory> findAllByArtist(String artist);
+    Mono<Inventory> findById(int id);
+    Mono<Inventory> deleteById(int id);
 }

@@ -26,7 +26,7 @@ public class GreetingController {
                 .map(name -> String.format("Admin access: %s", name));
     }
     @GetMapping("/greetingService")
-    public Mono<String> greetingService(){
+    public Mono<String> greetingService() {
         return greetingService.greet();
     }
 }

@@ -35,8 +35,7 @@ public class SecurityConfig {
 
     }
     @Bean
-    public SecurityWebFilterChain updateSecure(ServerHttpSecurity http)
-    {
+    public SecurityWebFilterChain updateSecure(ServerHttpSecurity http) {
         http.csrf().disable()
                 .authorizeExchange()
                 .pathMatchers(HttpMethod.POST, "/inventory/update").hasRole("ADMIN")
@@ -51,13 +50,11 @@ public class SecurityConfig {
                 .and().build();
     }
     @Bean
-    public PasswordEncoder passwordEncoder()
-    {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
     @Bean
-    public MapReactiveUserDetailsService userDetailsService()
-    {
+    public MapReactiveUserDetailsService userDetailsService() {
         UserDetails user = User
                 .withUsername("user")
                 .password(Objects.requireNonNull(passwordEncoder().encode("user")))

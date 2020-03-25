@@ -23,44 +23,43 @@ public class InventoryController {
     @Autowired
     private InventoryRepository invRepo;
 
-    static Map<String, Inventory> invMap;
     @GetMapping("/{id}")
-    public Mono<Inventory> getById(@PathVariable Integer id)
-    {
+    public Mono<Inventory> getById(@PathVariable Integer id) {
         log.info("ID utilized for request = {}", id);
         return invRepo.findById(id);
     }
+
     @GetMapping
-    public Flux<Inventory> findAll()
-    {
+    public Flux<Inventory> findAll() {
         return invRepo.findAll();
     }
+
     @GetMapping("/artist/{artist}")
-    public Flux<Inventory> findAllByArtist(@PathVariable String artist)
-    {
+    public Flux<Inventory> findAllByArtist(@PathVariable String artist) {
         log.info("Artist utilized for request = {}", artist);
         return invRepo.findAllByArtist(artist);
     }
+
     @GetMapping("/album/{album}")
-    public Flux<Inventory> findByAlbum(@PathVariable String album)
-    {
+    public Mono<Inventory> findByAlbum(@PathVariable String album) {
         log.info("Album utilized for request = {}", album);
-        return invRepo.findAllByArtist(album);
+        return invRepo.findByAlbum(album);
     }
+
     @PostMapping("/set")
-    public Mono<Inventory> setInventory(@RequestBody Inventory inventory){
+    public Mono<Inventory> setInventory(@RequestBody Inventory inventory) {
         log.info("{} has been inserted into the database", inventory);
         return invRepo.insert(inventory);
     }
+
     @DeleteMapping("/del/{id}")
-    public Mono<Inventory> delInventory(@PathVariable Integer id)
-    {
+    public Mono<Inventory> delInventory(@PathVariable Integer id) {
         log.info("ID utilized for request = {}", id);
         return invRepo.deleteById(id);
     }
+
     @PutMapping("/update")
-    public Mono<Inventory> updateInventory(@RequestBody Inventory inventory)
-    {
+    public Mono<Inventory> updateInventory(@RequestBody Inventory inventory) {
         log.info("{} has updated an entry in the database", inventory);
         return invRepo.save(inventory);
     }
